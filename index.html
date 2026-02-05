@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facility & Equipment Reservation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="login-section" class="auth-container">
+        <div class="card login-card">
+            <h2>🔐 ICT School Help Desk Login</h2>
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter your name">
+            </div>
+            <div class="input-group">
+                <label>Role</label>
+                <select id="role">
+                    <option value="user">Student/Teacher Name</option>
+                    <option value="admin">School Administrator</option>
+                </select>
+            </div>
+            <button class="login-btn" onclick="login()">Click Enter</button>
+        </div>
+    </div>
+
+    <div id="main-app" class="dashboard-container" style="display:none;">
+        
+        <div class="sidebar">
+            <div class="profile">
+                <h2 id="displayRole">User Profile</h2>
+                <p id="displayName"></p>
+            </div>
+            <nav>
+                <div id="user-nav">
+                    <div class="profile">
+                <h2 id="displayRole">User Profile</h2>
+                <p id="displayName"></p>
+            </div>
+                    <button onclick="showPage('user-reserve')">➕ New Reservation</button>
+                </div>
+                <div id="admin-nav">
+
+                    <button onclick="showPage('admin-manage')">📋 Admin Dashboard</button>
+                </div>
+                <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            
+            <div id="user-reserve" class="page">
+                <h1>Make a Reservation</h1>
+                <div class="card">
+                    <div class="input-group">
+                        <label>Classes/Purpose</label>
+                        <input type="text" id="eventTitle" placeholder="Ex: Orientation Meeting">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Reservation Type</label>
+                        <select id="resType" onchange="toggleItems()">
+                            <option value="Venue">Venue</option>
+                            <option value="Equipment">Equipment</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group" id="venue-select" >
+                        <label>Select Venue</label>
+                        <select id="venue">
+                            <option value="LABORATORY 1">LABORATORY 1</option>
+                            <option value="LABORATORY 2">LABORATORY 2</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group" id="equipment-select" style="display:none;">
+                        <label>Select Equipment</label>
+                        <select id="equipment">
+                            <option value="Projector">Projector</option>
+                            <option value="Sound System">Sound System</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Monoblock Chairs">Monoblock Chairs</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Date & Time</label>
+                        <input type="datetime-local" id="eventDate">
+                    </div>
+                    <button class="submit-btn" onclick="submitRequest()">Submit Reservation</button>
+                </div>
+            </div>
+
+            <div id="admin-manage" class="page" style="display:none;">
+                
+                <h1>Active Reservations</h1>
+                <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Item (Type)</th>
+                                <th>Schedule</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="history-container">
+                    <h3>📜 History</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Item</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody"></tbody>
+                    </table>
+                    <button class="clear-btn" onclick="clearHistory()">Clear All History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
